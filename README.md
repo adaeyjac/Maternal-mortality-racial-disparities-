@@ -1,44 +1,50 @@
-# Maternal-mortality-racial-disparities-
-Predictive modeling of regional U.S. cancer death rates using socioeconomic and demographic factors across 3,000+ counties via deep learning (MLP).
-# Cancer Mortality Prediction — Socioeconomic & Demographic Factors
+Empirical analysis of racial disparities in U.S. maternal mortality (2018–2024) using logistic regression and MLP models on CDC WONDER data.
+
+# Maternal Mortality & Racial Disparities — Empirical Analysis
 
 ## Overview
-This project investigates how accurately regional cancer death rates can 
-be predicted using socioeconomic and demographic variables across 3,000+ 
-U.S. counties using a deep neural network (MLP).
+This project analyzes racial disparities in U.S. maternal mortality rates 
+between 2018 and 2024, examining whether race and temporal trends are 
+statistically significant predictors of high mortality classification.
 
 ## Research Question
-How accurately can regional cancer death rates be predicted using 
-socioeconomic and demographic factors?
+How do racial disparities and temporal trends affect maternal mortality 
+rates among U.S. women between 2018 and 2024?
 
 ## Dataset
-- **Source:** Cancer Regression Dataset (Kaggle)
-- **Size:** 3,047 U.S. counties
-- **Features:** median income, poverty rate, insurance type, race, 
-  marital status, average annual cancer cases and deaths
-- **Target Variable:** target_deathrate (cancer death rate per region)
-- **Preprocessing:** null values removed, categorical variables encoded, 
-  features normalized
-
-## Methods
-- **Model:** Deep Neural Network (MLP)
-- **Architecture:** 3 hidden layers (100, 50, 25 neurons), ReLU activation
-- **Optimizer:** Adam | **Loss Function:** MSE
-- **Max Iterations:** 2,000
-- **Evaluation:** R², MAE, RMSE, MSE
+- **Source:** CDC WONDER Underlying Cause of Death Database (2018–2024)
+- **ICD-10 Codes:** O00–O99 (Pregnancy, childbirth, and puerperium)
+- **Filtered by:** Female sex, reproductive ages 15–49, all U.S. regions
+- **Final dataset:** 42 observations across 6 racial groups and 7 years
 
 ## Key Findings
-- Median income and poverty rate showed strong multicollinearity, 
-  confirming socioeconomic factors are deeply interrelated in predicting 
-  cancer outcomes
-- Model identified key socioeconomic drivers of regional cancer mortality 
-  disparities through permutation-based feature importance
+- Black women face nearly 3x higher maternal mortality than White women
+- Maternal mortality peaked in 2021, an 84% increase from 2018, reflecting 
+  the disproportionate impact of COVID-19
+- Race alone achieved 88% classification accuracy confirming disparities 
+  are deeply embedded and persistent across all years studied
+- Black women show the strongest positive coefficient (1.1393) vs Asian 
+  women at -1.3283 — one of the largest racial gaps identified
+
+## Methods
+- **Target Variable:** High Mortality — binary classification (above median 
+  crude rate = 1, below = 0)
+- **Predictor Variables:** Race (dummy encoded), Year
+- **Model 1:** Logistic Regression — baseline interpretable classification
+- **Model 2:** Multilayer Perceptron (MLP) — deep learning robust check
+- **Evaluation:** Accuracy, AUC, Precision, Recall, Confusion Matrix
+- **Split:** 80% training, 20% testing (random state 42)
+
+## Results
+| Metric | Logistic Regression | MLP |
+|--------|-------------------|-----|
+| Accuracy | 0.88 | 0.88 |
+| AUC | 1.00 | 1.00 |
+| Precision | 1.00 | 1.00 |
+| Recall | 0.67 | 0.67 |
 
 ## Tools & Libraries
-Python, scikit-learn, pandas, matplotlib, seaborn, Jupyter Notebook
-
-## Team
-Adaeyja Chambers, Ashley Biagini
+Python, pandas, scikit-learn, matplotlib, seaborn, Jupyter Notebook
 
 ## Course
-BUS638 Deep Learning | SUNY New Paltz | Spring 2026
+BUS626 Healthcare Analytics | SUNY New Paltz | Spring 2026
